@@ -1,3 +1,5 @@
+"use strict"
+
 // 通用数据获取proxy
 
 import Request from "request";
@@ -12,13 +14,6 @@ function getClientIp(req) {
         ip = ip.replace(/::ffff:/, '');
     }
     return ip;
-}
-
-let Params = function(){
-	this.success = true;
-	this.msg = "";
-	this.errorCode = 0;
-	this.data = {};
 }
 
 function getParams(){
@@ -47,15 +42,29 @@ function getParams(){
 	return this.params;
 }
 
-const HttpConnection = function(opt){
+function render(data,hasErr){
+	let responseData = {
+		msg: '',
+		errorCode: ''
+	};
+	hasErr ? responseData.success = false : responseData.success =true;
+	if(data){
+		if(!!(typeof data.success) && !!(typeof data.msg) && !!(typeof data.data)){
+			responseData = _.assign(responseData, data.data)
+		}else{
+			responseData.data = data;
+		}
+	}
+	return responseData;
+}
+
+
+let HttpConnection = function(opt){
 	this.req = opt.req;
 };
 
-HttpConnection.prototype =new Params();
-HttpConnection.prototype.constructor = Params;
-
-HttpConnection.sendCallback = function(data,success){}
-HttpConnection.sendErrCallback =function(data,err){}
+HttpConnection.sendCallback = function(data,success){};
+HttpConnection.sendErrCallback =function(data,err){};
 
 HttpConnection.prototype.send =function(sendData){
 	const req=this.req;
@@ -156,5 +165,5 @@ function proxyFn(req, url, callback, params, errCallback){
 }
 
 exports.send = proxyFn;
-exports.renderSend = HttpConnection.sendCallback;
-exports.renderErrSend = HttpConnection.sendErrCallback;
+exports.renderSend = (data)=> render(data);
+exports.renderErrSend = (data)=> render(data,true);
