@@ -2,9 +2,7 @@
 
 Simplify usage and proxy for request.js
 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![David deps][david-image]][david-url]
+[![GitHub issues](https://img.shields.io/github/issues/paraofheaven/request-proxy.svg)](https://github.com/paraofheaven/request-proxy/issues)
 
 - [Install](#install)
 - [Usage](#usage)
