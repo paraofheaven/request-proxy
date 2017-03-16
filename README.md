@@ -46,10 +46,10 @@ exports.getInfo =function(req,res){
 ```	
 ## Options
 
-     option    |    type   |  default                  |Required
----------------|-----------|---------------------------|--------
-     `api`     |   String  | `http://myapi.com/getinfo`| Yes
-    `params`   |  Object   |  `{}`                     | No
+  option    |    type   |  default                  |Required
+  ----------|-----------|---------------------------|--------
+  `api`     |   String  | `http://myapi.com/getinfo`| Yes
+  `params`  |  Object   |  `{}`                     | No
 						   
 
 						   
