@@ -1,12 +1,12 @@
 "use strict"
 
-// 通用数据获取proxy
+// 通用数据获取request proxy
 
 import Request from "request";
 import _ from "lodash";
 
 function getClientIp(req) {
-    var ip = req.headers['ip'] ||
+    const ip = req.headers['ip'] ||
         (req.connection && req.connection.remoteAddress) ||
         (req.socket && req.socket.remoteAddress) ||
         (req.connection && req.connection.socket && req.connection.socket.remoteAddress) || "";
@@ -24,25 +24,25 @@ function getParams(){
 
 	if(this.base64){
 		if(this.method === "GET"){
-			this.params = "?" + base64.encode(params);
+			params = "?" + base64.encode(params);
 		}else{
-			this.params = base64.encode(params);
+			params = base64.encode(params);
 		}
 	} else {
 		if(this.method === "GET"){
 			if(this.dataType &&　this.dataType == "base64"){
-				this.params = "?dataType=base64&data=" +params;
+				params = "?dataType=base64&data=" +params;
 			}else{
-				this.params = "?" +this.paramsName + "=" +encodeURIComponent(params);
+				params = "?" +this.paramsName + "=" +encodeURIComponent(params);
 			}
 		}else{
-			return this.params;
+			return params;
 		}
 	}
-	return this.params;
+	return params;
 }
 
-function render(data,hasErr){
+function renderResponse(data,hasErr){
 	let responseData = {
 		msg: '',
 		errorCode: ''
@@ -61,10 +61,9 @@ function render(data,hasErr){
 
 let HttpConnection = function(opt){
 	this.req = opt.req;
+	this.sendCallback = opt.callback || function(data,success){};
+	this.sendErrCallback =opt.errCallback || function(data,err){};
 };
-
-HttpConnection.prototype.sendCallback = function(data,success){};
-HttpConnection.prototype.sendErrCallback =function(data,err){};
 
 HttpConnection.prototype.send =function(sendData){
 	const req=this.req;
@@ -153,17 +152,17 @@ HttpConnection.prototype.send =function(sendData){
     }
 }
 
-function proxyFn(req, url, callback, params, errCallback){
+function proxy(req, url, callback, params, errCallback){
 	const hc =new HttpConnection({
-		req: req
+		req: req,
+		callback: callback,
+		errCallback: errCallback
 	});
 	hc.send(_.assign(params || {} ,{
 		url : url
 	}));
-	hc.sendCallback =callback;
-	hc.sendErrCallback =errCallback;
 }
 
-exports.send = proxyFn;
-exports.renderSend = (data)=> render(data);
-exports.renderErrSend = (data)=> render(data,true);
+exports.send = proxy;
+exports.renderSend = (data)=> renderResponse(data);
+exports.renderErrSend = (data)=> renderResponse(data,true);
