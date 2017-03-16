@@ -1,6 +1,6 @@
 "use strict"
 
-// 通用数据获取request proxy
+//request proxy
 
 import Request from "request";
 import _ from "lodash";
@@ -80,12 +80,12 @@ function proxy(req, url, callback, params, errCallback){
             logs: false,
             paramsName: "data"
         };
-        const responseStart = new Date().getTime();
 
         _.assign(this, defaultData, sendData);
 
         const params = getParams.bind(this);
 
+        const responseStart = new Date().getTime();
         if(this.method === "POST"){
             let postConfig ={
                 url: this.url,
