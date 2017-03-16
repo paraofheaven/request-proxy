@@ -63,8 +63,8 @@ let HttpConnection = function(opt){
 	this.req = opt.req;
 };
 
-HttpConnection.sendCallback = function(data,success){};
-HttpConnection.sendErrCallback =function(data,err){};
+HttpConnection.prototype.sendCallback = function(data,success){};
+HttpConnection.prototype.sendErrCallback =function(data,err){};
 
 HttpConnection.prototype.send =function(sendData){
 	const req=this.req;
@@ -94,7 +94,7 @@ HttpConnection.prototype.send =function(sendData){
     		}
     	};
     	this.json ? postConfig.json =params : postConfig.form ={data:JSON.stringify(params)}
-    	Request.post(postConfig,responseData.bind(this));
+    	Request.post(postConfig,responseCallback.bind(this));
     }else{
     	let otherConfig ={
     		url: this.url + params,
@@ -102,10 +102,10 @@ HttpConnection.prototype.send =function(sendData){
     			'ip': ip
     		}
     	}
-    	Request(otherConfig, responseData.bind(this));
+    	Request(otherConfig, responseCallback.bind(this));
     }
 
-    function responseData(err, res, body){
+    function responseCallback(err, res, body){
     	if(err){
     		this.sendErrCallback.bind(this,body,err);
     		if(req.log){
