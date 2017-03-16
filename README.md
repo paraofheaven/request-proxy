@@ -45,13 +45,14 @@ exports.getInfo =function(req,res){
 
 ```	
 ## Options
-```js
+
      option    |    type   |  default                  |Required
 ---------------|-----------|---------------------------|--------
      `api`     |   String  | `http://myapi.com/getinfo`| Yes
     `params`   |  Object   |  `{}`                     | No
 						   
-```
+
+						   
 ### Params-declaration
 
 There are six kinds of params for the `params`
@@ -103,19 +104,19 @@ A plain Object like this :
 
 ```js
 {
-	msg: "",
-	success: true,
-	errorCode: "",
-	data:{
-	// xxx
-	}
+  msg: "",
+  success: true,
+  errorCode: "",
+  data:{
+  // xxx
+  }
 }
 // or
 {
-	msg: "accid is wrong",
-	success: false,
-	errorCode: "30001",
-	data:{}
+  msg: "accid is wrong",
+  success: false,
+  errorCode: "30001",
+  data:{}
 }
 ```
 
