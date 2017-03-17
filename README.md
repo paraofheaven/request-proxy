@@ -2,9 +2,9 @@
 
 Simplify usage and proxy for request.js
 
-[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)]()
+[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)](https://github.com/paraofheaven/request-proxy/)
 [![GitHub issues](https://img.shields.io/github/issues/paraofheaven/request-proxy.svg)](https://github.com/paraofheaven/request-proxy/issues)
-[![npm](https://img.shields.io/npm/dm/localeval.svg)]()
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/paraofheaven/request-proxy.git)
 
 - [Install](#install)
 - [Usage](#usage)
