@@ -4,7 +4,7 @@
   "description": "Simplify usage and proxy for request.js",
   "author": "Para Yong <1549930735@qq.com>",
   "license": "MIT",
-  "repository": "git@github.com:paraofheaven/requestPluginBasedOnFetch.git",
+  "repository": "git@github.com:paraofheaven/request-proxy.git",
   "scripts": {
     "prepublish": "npm run lint",
     "lint": "./node_modules/.bin/eslint index.js"
