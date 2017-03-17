@@ -6,9 +6,13 @@
   "license": "MIT",
   "repository": "git@github.com:paraofheaven/request-proxy.git",
   "scripts": {
-    "prePublish": "npm run lint" ,
+    "prePublish": "npm run lint",
     "lint": "./node_modules/.bin/eslint index.js"
   },
+  "bugs": {
+    "url": "https://github.com/paraofheaven/request-proxy/issues"
+  },
+  "homepage": "https://github.com/paraofheaven/request-proxy#readme",
   "dependencies": {
     "request": "^2.55.0",
     "lodash": "^4.11.1"

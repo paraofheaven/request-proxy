@@ -134,7 +134,7 @@ function proxy(req, url, callback, params, errCallback){
                     }
                 }catch(e){
                     console.error(e.stack);
-                    this.sendErrCallback.bind(this, e, e);
+                    this.sendErrCallback.bind(e, e);
 
                     if (req.log) {
                         req.log.error("ip: " + ip + " " + this.method + " " + this.url + " 200 responseTimeNJ=" + responseTime  + "ms params=" + JSON.stringify(params) + " error=" + e.stack, "JAVA");
@@ -143,7 +143,7 @@ function proxy(req, url, callback, params, errCallback){
                     return ;
                 }
             }else{
-                this.sendErrCallback.bind(this, e, e);
+                this.sendErrCallback(e, e);
                 if (req.log) {
                     req.log.error(tn_realip + " " + this.method + " " + this.url + " " + res.statusCode + " params= " + JSON.stringify(params), "JAVA");
                 }

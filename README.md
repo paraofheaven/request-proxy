@@ -38,7 +38,7 @@ exports.getInfo =function(req,res){
 		if(!success){
 			return res.send(proxy.renderErrSend(data.msg))
 		}else{
-			res.send(proxy.renderSend(data));
+			return res.send(proxy.renderSend(data));
 		}
 	},params,callErrorback);
 }
@@ -46,11 +46,11 @@ exports.getInfo =function(req,res){
 ```	
 ## Options
 
-  option    |    type   |  default                  |Required
-  ----------|-----------|---------------------------|--------
-  `api`     |   String  | `http://myapi.com/getinfo`| Yes
-  `params`  |  Object   |  `{}`                     | No
-						   
+  option         |    type   |  default                  |Required
+  ---------------|-----------|---------------------------|--------
+  `api`          |   String  | `http://myapi.com/getinfo`| Yes
+  `params`       |  Object   |  `{}`                     | No
+  `callErrorback`|  Function |                           | No					   
 
 						   
 ### Params-declaration
