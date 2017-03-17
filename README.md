@@ -2,16 +2,16 @@
 
 Simplify usage and proxy for request.js
 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![David deps][david-image]][david-url]
+[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)](https://github.com/paraofheaven/request-proxy/)
+[![GitHub issues](https://img.shields.io/github/issues/paraofheaven/request-proxy.svg)](https://github.com/paraofheaven/request-proxy/issues)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/paraofheaven/request-proxy.git)
 
 - [Install](#install)
 - [Usage](#usage)
 - [Options](#options)
 	- [`params` declaration](#params-declaration)
-- [`Exports`](#exports)
-- [`Return`](#return)
+- [Exports](#exports)
+- [Return](#return)
 - [Example](#example)
 - [License](#license)
 
@@ -46,10 +46,10 @@ exports.getInfo =function(req,res){
 ```	
 ## Options
 
-     option    |    type   |  default                  |Required
----------------|-----------|---------------------------|--------
-     `api`     |   String  | `http://myapi.com/getinfo`| Yes
-    `params`   |  Object   |  `{}`                     | No
+  option    |    type   |  default                  |Required
+  ----------|-----------|---------------------------|--------
+  `api`     |   String  | `http://myapi.com/getinfo`| Yes
+  `params`  |  Object   |  `{}`                     | No
 						   
 
 						   
