@@ -1,14 +1,14 @@
-"use strict"
+'use strict';
 
 //request proxy
 
-import Request from "request";
-import _ from "lodash";
+var Request= require("request");
+var _ = require("lodash");
 
 function proxy(req, url, callback, params, errCallback){
 
     function getClientIp(req) {
-        const ip = req.headers['ip'] ||
+        var ip = req.headers['ip'] ||
             (req.connection && req.connection.remoteAddress) ||
             (req.socket && req.socket.remoteAddress) ||
             (req.connection && req.connection.socket && req.connection.socket.remoteAddress) || "";
@@ -19,7 +19,7 @@ function proxy(req, url, callback, params, errCallback){
     }
 
     function getParams(){
-        let params =this.param;
+        var params =this.param;
         if(typeof params !== "string"){
             params = JSON.stringify(this.params);
         }
@@ -45,7 +45,7 @@ function proxy(req, url, callback, params, errCallback){
     }
 
     function renderResponse(data,success){
-        let responseData = {
+        var responseData = {
             msg: '',
             errorCode: '',
             success: success
@@ -60,7 +60,7 @@ function proxy(req, url, callback, params, errCallback){
         return responseData;
     }
 
-    let HttpConnection = function(opt){
+    var HttpConnection = function(opt){
         this.req = opt.req;
         this.sendCallback = opt.callback || function(data,success){};
         this.sendErrCallback =opt.errCallback || function(data,err){};
@@ -68,7 +68,6 @@ function proxy(req, url, callback, params, errCallback){
 
     HttpConnection.prototype.send =function(sendData){
         const req=this.req;
-        const username = this.req.session.username;
         const ip = req.headers['ip'] || getClientIp(req);
         const defaultData = {
             url: "",
@@ -87,7 +86,7 @@ function proxy(req, url, callback, params, errCallback){
 
         const responseStart = new Date().getTime();
         if(this.method === "POST"){
-            let postConfig ={
+            var postConfig ={
                 url: this.url,
                 headers: {
                     'ip': ip 
@@ -96,7 +95,7 @@ function proxy(req, url, callback, params, errCallback){
             this.json ? postConfig.json =params : postConfig.form ={data:JSON.stringify(params)}
             Request.post(postConfig,responseCallback.bind(this));
         }else{
-            let otherConfig ={
+            var otherConfig ={
                 url: this.url + params,
                 headers: {
                     'ip': ip
@@ -113,7 +112,7 @@ function proxy(req, url, callback, params, errCallback){
                 }
                 return console.error("error: " + err);
             }
-            let data,
+            var data,
                 responseTime = new Date().getTime() - responseStart;
 
             if(res.statusCode ===200){
@@ -131,7 +130,7 @@ function proxy(req, url, callback, params, errCallback){
                         this.sendCallback.bind(this,data, false, data.errorCode || undefined);
                     }
                     if(req.log){
-                        req.log.info("ip: " + ip + " with method:" + this.method + " with url:" + this.url + " 200 responseTimeNJ=" + responseTime  + "ms params=" + JSON.stringify(params) + " data=" + (JSON.stringify(data).length <= 3000 ? JSON.stringify(data) : "data's length is too long!")
+                        req.log.info("ip: " + ip + " with method:" + this.method + " with url:" + this.url + " 200 responseTimeNJ=" + responseTime  + "ms params=" + JSON.stringify(params) + " data=" + (JSON.stringify(data).length <= 3000 ? JSON.stringify(data) : "data's length is too long!"));
                     }
                 }catch(e){
                     console.error(e.stack);
@@ -153,7 +152,7 @@ function proxy(req, url, callback, params, errCallback){
         }
     };
 
-	const hc =new HttpConnection({
+	var hc =new HttpConnection({
 		req: req,
 		callback: callback,
 		errCallback: errCallback
@@ -164,5 +163,5 @@ function proxy(req, url, callback, params, errCallback){
 }
 
 exports.send = proxy;
-exports.renderSend = (data)=> proxy.renderResponse(data,true);
-exports.renderErrSend = (data)=> proxy.renderResponse(data,false);
+exports.renderSend = function(data) { proxy.renderResponse(data,true) };
+exports.renderErrSend = function(data) { proxy.renderResponse(data,false) };
