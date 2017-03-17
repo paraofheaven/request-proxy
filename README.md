@@ -10,8 +10,8 @@ Simplify usage and proxy for request.js
 - [Usage](#usage)
 - [Options](#options)
 	- [`params` declaration](#params-declaration)
-- [`Exports`](#exports)
-- [`Return`](#return)
+- [Exports](#exports)
+- [Return](#return)
 - [Example](#example)
 - [License](#license)
 
