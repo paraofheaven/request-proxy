@@ -60,11 +60,11 @@ function proxy(req, url, callback, params, errCallback){
         return responseData;
     }
 
-    var HttpConnection = function(opt){
+    function HttpConnection(opt){
         this.req = opt.req;
         this.sendCallback = opt.callback || function(data,success){};
         this.sendErrCallback =opt.errCallback || function(data,err){};
-    };
+    }
 
     HttpConnection.prototype.send =function(sendData){
         const req=this.req;
